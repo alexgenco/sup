@@ -336,8 +336,11 @@ func (n Network) ParseInventory(conf *Supfile) ([]string, error) {
 
 	cmd := exec.Command("/bin/sh", "-c", n.Inventory)
 	cmd.Env = os.Environ()
-	cmd.Env = append(cmd.Env, n.Env.Slice()...)
+	fmt.Printf("\n%v\n", cmd.Env)
 	cmd.Env = append(cmd.Env, conf.Env.Slice()...)
+	fmt.Printf("\n%v\n", cmd.Env)
+	cmd.Env = append(cmd.Env, n.Env.Slice()...)
+	fmt.Printf("\n%v\n", cmd.Env)
 	cmd.Stderr = os.Stderr
 	output, err := cmd.Output()
 	if err != nil {
